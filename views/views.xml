@@ -1,0 +1,26 @@
+<odoo>
+  <data>
+
+    <record id="view_order_form_add" model="ir.ui.view">
+      <field name="name">view_order_form_add</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+
+      <field name="arch" type="xml">
+        <xpath expr="//group/group/field[@name='partner_id']" position="replace">
+          <field name="partner_id" string="Customer" widget="res_partner_many2one" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}'/>
+        </xpath>
+
+        <xpath expr="//group/group/field[@name='partner_invoice_id']" position="replace">
+          <field name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice' , 'show_address': 1 }" options='{"always_reload": True}'/>
+        </xpath>
+
+        <xpath expr="//group/group/field[@name='partner_shipping_id']" position="replace">
+          <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery' , 'show_address': 1 }" options='{"always_reload": True}'/>
+        </xpath>
+
+      </field>
+
+    </record> 
+  </data>
+</odoo>
